@@ -1,11 +1,18 @@
-import { APIGatewayProxyHandler } from 'aws-lambda';
+import * as bodyParser from 'body-parser';
+import * as express from 'serverless-express/express';
+import * as handler from 'serverless-express/handler';
+const app: express.Application = express();
 
-export const hello: APIGatewayProxyHandler = async (event, _context) => {
-    return {
-        statusCode: 200,
-        body: JSON.stringify({
-            message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-            input: event,
-        }),
-    };
-}
+app.use(bodyParser.json({ strict: false }));
+app.use((req: express.Request, res: express.Response, next: express.NextFunction): void => {
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next()
+});
+
+app.get('/hello', async (req: express.Request, res: express.Response): Promise<void> => {
+    res.json({message : "hello world"});
+});
+
+exports.api = handler(app);

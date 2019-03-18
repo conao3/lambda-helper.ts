@@ -4,6 +4,7 @@ service:
 # Add the serverless-webpack plugin
 plugins:
   - serverless-webpack
+  - serverless-express
 
 provider:
   name: aws
@@ -11,8 +12,8 @@ provider:
 
 functions:
   lambda-typescript:
-    handler: handler.hello
+    handler: handler.api
     events:
       - http:
-          method: get
-          path: hello
+          path: /{proxy+}
+          method: ANY
