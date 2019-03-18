@@ -11,6 +11,10 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
     next()
 });
 
+app.get('/', async (req: express.Request, res: express.Response): Promise<void> => {
+    res.json({apis : "/hello"});
+});
+
 app.get('/hello', async (req: express.Request, res: express.Response): Promise<void> => {
     res.json({message : "hello world"});
 });
