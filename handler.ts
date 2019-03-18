@@ -1,6 +1,11 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'serverless-express/express';
 import * as handler from 'serverless-express/handler';
+
+// svg2png
+import * as svg2png from 'svg2png';
+
+
 const app: express.Application = express();
 
 app.use(bodyParser.json({ strict: false }));
