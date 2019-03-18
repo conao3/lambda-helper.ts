@@ -10,7 +10,7 @@ provider:
   runtime: nodejs8.10
 
 functions:
-  hello:
+  lambda-typescript:
     handler: handler.hello
     events:
       - http:
