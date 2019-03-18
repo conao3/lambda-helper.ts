@@ -55,6 +55,15 @@ app.get('/header/:str.svg', async (req: express.Request, res: express.Response):
     res.send(github_header_svg(str, forground, background));
 });
 
+app.get('/header/:str.png', function(req: express.Request, res: express.Response) {
+    const str = req.params.str || 'Unknown';
+    const forground = req.query.forground || 'FFF';
+    const background = req.query.background || '222';
+
+    res.type('png');
+    res.end(svg2png.sync(github_header_svg(str, forground, background)));
+});
+
 //////////////////////////////////////////////////
 
 exports.api = handler(app);
