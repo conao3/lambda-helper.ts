@@ -3,8 +3,8 @@ import * as express from 'serverless-express/express';
 import * as handler from 'serverless-express/handler';
 
 // svg2png
+import * as fs from 'pn/fs';
 import * as svg2png from 'svg2png';
-
 
 //////////////////////////////////////////////////
 
@@ -60,8 +60,11 @@ app.get('/header/:str.png', function(req: express.Request, res: express.Response
     const forground = req.query.forground || 'FFF';
     const background = req.query.background || '222';
 
+    const svg = github_header_svg(str, forground, background);
+    fs.readFileSync('/tmp/dest.png', svg2png.sync(svg), {flag: "wx"});
+
     res.type('png');
-    res.end(svg2png.sync(github_header_svg(str, forground, background)));
+    res.end(new Buffer(fs.readFileSync('tmp/dest.png'), 'base64'));
 });
 
 //////////////////////////////////////////////////
