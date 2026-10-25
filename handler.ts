@@ -2,9 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'serverless-express/express';
 import * as handler from 'serverless-express/handler';
 
-// svg2png
-import * as fs from 'pn/fs';
-import * as svg2png from 'svg2png';
+import sharp from 'sharp';
 
 //////////////////////////////////////////////////
 
@@ -55,16 +53,16 @@ app.get('/header/:str.svg', async (req: express.Request, res: express.Response):
     res.send(github_header_svg(str, forground, background));
 });
 
-app.get('/header/:str.png', function(req: express.Request, res: express.Response) {
+app.get('/header/:str.png', async (req: express.Request, res: express.Response): Promise<void> => {
     const str = req.params.str || 'Unknown';
     const forground = req.query.forground || 'FFF';
     const background = req.query.background || '222';
 
     const svg = github_header_svg(str, forground, background);
-    fs.readFileSync('/tmp/dest.png', svg2png.sync(svg), {flag: "wx"});
+    const png = await sharp(Buffer.from(svg)).png().toBuffer();
 
     res.type('png');
-    res.end(new Buffer(fs.readFileSync('tmp/dest.png'), 'base64'));
+    res.send(png);
 });
 
 //////////////////////////////////////////////////
