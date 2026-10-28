@@ -17,7 +17,7 @@ This project provides a simple API for generating customizable header images for
 
 ## Requirements
 
-- Node.js 8.10 or later
+- Node.js 24 or later
 - npm or Yarn
 - AWS CLI (configured with appropriate credentials)
 - Serverless Framework
@@ -119,7 +119,7 @@ lambda-helper.ts/
 
 The service is configured in `serverless.yml`:
 
-- **Runtime:** Node.js 8.10
+- **Runtime:** Node.js 24 (`nodejs24.x`)
 - **Provider:** AWS
 - **Plugins:** serverless-webpack, serverless-offline, serverless-express
 
