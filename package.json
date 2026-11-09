@@ -23,5 +23,11 @@
         "webpack": "^5.112.2"
     },
     "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
-    "license": "MIT"
+    "license": "MIT",
+    "overrides": {
+        "minimatch": "^11.0.1"
+    },
+    "resolutions": {
+        "minimatch": "^11.0.1"
+    }
 }
