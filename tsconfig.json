@@ -3,7 +3,8 @@
         "lib": [
             "es2017"
         ],
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
+        "strict": false,
         "sourceMap": true,
         "target": "es2017",
         "outDir": "lib"
